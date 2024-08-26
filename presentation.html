@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sliding Images</title>
+    <!-- Link to Poppins font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Poppins', Arial, sans-serif;
+            /* Apply Poppins font */
+        }
+
+        .message .p-1 {
+            font-size: 20px;
+        }
+
+        .message .p-2 {
+            font-size: 20px;
+        }
+        /* wrapper */ 
+        .wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            background-color: #e60073;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            animation: bounce 1s infinite;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            font-family: 'Poppins', Arial, sans-serif;
+            /* Ensure button uses Poppins font */
+        }
+
+        button:hover {
+            background-color: #cc005c;
+        }
+
+        /* Bouncing animation */
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-30px);
+            }
+
+            60% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* Slider styles */
+        .slider-container {
+            display: none;
+            background-color: red;
+        }
+
+        .slider {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            /* Full viewport height */
+            overflow: hidden;
+            background-color: red;
+        }
+
+        .slides {
+            display: flex;
+            width: 900%;
+            /* Twice the width of the slider */
+            height: 100%;
+            transition: transform 1s linear;
+            /* Smooth transition */
+        }
+
+        .slide {
+            position: relative;
+            /* Make the slide container the positioning context */
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73));
+            z-index: 1;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Ensure the image covers the slide */
+            z-index: 0;
+            /* Place image below the gradient overlay */
+        }
+
+        @keyframes slide {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+
+            /* Move by half the width of slides container */
+        }
+
+        .slider.playing .slides {
+            animation: slide 20s linear infinite;
+        }
+
+        .slider.stopped .slides {
+            animation: none;
+            /* Stop the animation */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .slider {
+                height: 100vh;
+                /* Adjust height for mobile if needed */
+            }
+
+            .slides {
+                width: 900%;
+                /* Adjust width for mobile if needed */
+            }
+
+            .slide img {
+                object-fit: cover;
+                /* Ensure images cover the slide area on mobile */
+            }
+
+            .message .p-1 {
+                font-size: 12px;
+            }
+
+            .message2 .p-2 {
+                font-size: 10px;
+            }
+
+
+
+
+        }
+
+        .message {
+
+            position: absolute;
+            top: 90%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 80%;
+            text-align: center;
+            color: #333;
+            z-index: 9000;
+            display: none;
+
+        }
+
+        .message2 {
+
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 80%;
+            text-align: center;
+            color: #333;
+            z-index: 9000;
+            display: none;
+
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <div class="wrapper">
+        <button id="clickMe">Click Me</button>
+    </div>
+    <div class="message">
+        <p>Happy 730 days of ❤ Mahal😘</p>
+        <!-- <p class="p-1">Sample Message</p> -->
+    </div>
+    <div class="message2">
+        <p class="p-2">Hi Gong</p>
+        <p>Happy 2nd Anniversary sa atoang relationship🥰 </p>
+        <p>naabot tag 2 years tungod  sa atoang pagpili sa usag usa bsin paman 
+            nga taga adlaw mag sge tag lalis </p>
+        <p>nanghinaot ko nga magpabilin ta nga lig on 
+            ug magsinabtanay</p>
+        <p>giampo tika sa Ginoo nga ikaw akong makauban till the end</p>
+        <p>I love you!😗</p>
+
+    </div>
+    <div class="slider-container">
+
+        <div class="slider playing">
+            <div class="slides">
+                <div class="slide"><img src="image1.jpg" alt="Image 1"></div>
+                <div class="slide"><img src="image2.jpeg" alt="Image 2"></div>
+                <div class="slide"><img src="image3.jpeg" alt="Image 3"></div>
+                <div class="slide"><img src="image4.jpeg" alt="Image 4"></div>
+                <div class="slide"><img src="image5.jpeg" alt="Image 5"></div>
+                <div class="slide"><img src="image6.jpeg" alt="Image 6"></div>
+                <div class="slide"><img src="image16.jpg" alt="Image 7"></div>
+       
+                <div class="slide"><img src="image8.jpg" alt="Image 1"></div>
+                <div class="slide"><img src="image9.jpg" alt="Image 2"></div>
+                <div class="slide"><img src="image10.jpg" alt="Image 3"></div>
+                <div class="slide"><img src="image11.jpg" alt="Image 4"></div>
+                <div class="slide"><img src="image12.jpg" alt="Image 5"></div>
+                <div class="slide"><img src="image13.jpg" alt="Image 5"></div>
+                <div class="slide"><img src="image14.jpg" alt="Image 5"></div>
+                <div class="slide"><img src="image15.jpg" alt="Image 5"></div>
+                <div class="slide"><img src="image16.jpg" alt="Image 5"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <audio id="audio" src="luke.mp3"></audio>
+
+    <script>
+        document.getElementById('clickMe').addEventListener('click', function () {
+            const sliderContainer = document.querySelector('.slider-container');
+            const wrapper = document.querySelector('.wrapper');
+            const slider = document.querySelector('.slider');
+            const message = document.querySelector('.message');
+            const audio = document.getElementById('audio');
+
+            if (sliderContainer.style.display === 'none' || sliderContainer.style.display === '') {
+                sliderContainer.style.display = 'block';
+                message.style.display = 'block';
+                slider.classList.add('playing'); 
+                audio.play(); 
+                wrapper.style.display = 'none';
+            } else {
+                sliderContainer.style.display = 'none';
+                slider.classList.remove('playing');
+                slider.classList.add('stopped');
+                audio.pause(); 
+            }
+        });
+
+        document.getElementById('audio').addEventListener('ended', function () {
+            const slider = document.querySelector('.slider');
+            const message = document.querySelector('.message');
+            const message2 = document.querySelector('.message2');
+            slider.classList.remove('playing'); 
+            slider.classList.add('stopped'); 
+            message2.style.display = 'block';
+            message.style.display = 'none';
+        });
+    </script>
+
+</body>
+
+</html>

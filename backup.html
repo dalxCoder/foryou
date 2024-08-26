@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sliding Images</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        .slider-container{
+                display: none;
+                background-color: red;
+            }
+
+        .slider {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Full viewport height */
+            overflow: hidden;
+            background-color: red;
+        }
+
+        .slides {
+            display: flex;
+            width: 700%; /* Twice the width of the slider */
+            height: 100%;
+            animation: slide 20s linear infinite;
+        }
+
+        .slide {
+            position: relative; /* Make the slide container the positioning context */
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+            linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73));
+            z-index: 1;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensure the image covers the slide */
+            z-index: 0; /* Place image below the gradient overlay */
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); } /* Move by half the width of slides container */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .slider {
+                height: 100vh; /* Adjust height for mobile if needed */
+            }
+
+            .slides {
+                width: 700%; /* Adjust width for mobile if needed */
+                animation: slide 20s linear infinite;
+            }
+            
+            .slide img {
+                object-fit: cover; /* Ensure images cover the slide area on mobile */
+            }
+
+           
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <button id="clickMe">Click Me</button>
+    </div>
+
+    <div class="slider-container">
+    <div class="slider">
+        <div class="slides">
+            <div class="slide"><img src="image1.jpg" alt="Image 1"></div>
+            <div class="slide"><img src="image2.jpeg" alt="Image 2"></div>
+            <div class="slide"><img src="image3.jpeg" alt="Image 3"></div>
+            <div class="slide"><img src="image4.jpeg" alt="Image 4"></div>
+            <div class="slide"><img src="image5.jpeg" alt="Image 5"></div>
+            <div class="slide"><img src="image6.jpeg" alt="Image 6"></div>
+            <div class="slide"><img src="image7.jpeg" alt="Image 6"></div>
+            <!-- Duplicate the slides to create a seamless loop -->
+            <div class="slide"><img src="image1.jpg" alt="Image 1"></div>
+            <div class="slide"><img src="image2.jpeg" alt="Image 2"></div>
+            <div class="slide"><img src="image3.jpeg" alt="Image 3"></div>
+            <div class="slide"><img src="image4.jpeg" alt="Image 4"></div>
+            <div class="slide"><img src="image5.jpeg" alt="Image 5"></div>
+            <div class="slide"><img src="image6.jpeg" alt="Image 6"></div>
+        </div>
+    </div>
+    </div>
+
+    <!-- <button id="playAudioButton">Play Audio</button> -->
+    <!-- Embed audio file -->
+    <audio id="audio" src="luke.mp3"></audio>
+
+    <script>
+    document.getElementById('clickMe').addEventListener('click', function() {
+    const slidercontainer = document.querySelector('.slider-container');
+    const wrapper = document.querySelector('.wrapper');
+    // Toggle the display property
+    if (slidercontainer.style.display === 'none' || slidercontainer.style.display === '') {
+        slidercontainer.style.display = 'block';
+    } else {
+        slidercontainer.style.display = 'none';
+    }
+    wrapper.style.display='none';
+    const audio = document.getElementById('audio');
+    audio.play(); // Play the audio
+     
+});
+    
+    </script>
+
+
+</body>
+</html>

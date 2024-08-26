@@ -3,160 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Flipbook</title>
+    <title>Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
+           
+            background-color: #ffe6e6;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f0f0f0;
+            font-family: 'Poppins', sans-serif;
         }
 
-        .flipbook-container {
-            position: relative;
-            width: 350px; /* Adjusted width for screen size */
-            height: 500px; /* Adjusted height for screen size */
-            perspective: 1000px;
-        }
-
-        .flipbook {
+        .login-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
             width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            transform: rotateY(0deg);
-            transition: transform 0.6s;
+            text-align: center;
         }
 
-        .page {
-            position: absolute;
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #e60073;
+            font-weight: 600;
+        }
+
+        .login-container input[type="text"], 
+        .login-container input[type="password"] {
             width: 100%;
-            height: 100%;
-            background: #fff;
-            border: 1px solid #ddd;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            backface-visibility: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #e60073;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .hint {
+            font-size: 12px;
+            color: #e60073;
+            margin-bottom: 10px;
+            text-align: left;
+            width: 100%;
+            display: block;
+        }
+
+        .login-container input[type="submit"] {
+            background-color: #e60073;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            width: 100%;
             cursor: pointer;
-            transition: transform 0.6s;
+            font-size: 16px;
+            margin-top: 20px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
         }
 
-        .page:nth-child(1) { background: #f8b400; }
-        .page:nth-child(2) { background: #f44336; transform: rotateY(-90deg); }
-        .page:nth-child(3) { background: #4caf50; transform: rotateY(-180deg); }
-        .page:nth-child(4) { background: #2196f3; transform: rotateY(-270deg); }
-
-        .half {
-            position: absolute;
-            width: 50%;
-            height: 100%;
-            top: 0;
+        .login-container input[type="submit"]:hover {
+            background-color: #cc005c;
         }
 
-        .left-half {
-            left: 0;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            padding-left: 10px;
+        .login-container .heart-icon {
+            font-size: 24px;
+            color: #e60073;
         }
 
-        .right-half {
-            right: 0;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            padding-right: 10px;
+        .login-container p {
+            color: #e60073;
+            font-size: 14px;
         }
 
-        .left-half::before {
-            content: '❮';
-            font-size: 2em; /* Adjusted symbol size */
-            color: rgba(0, 0, 0, 0.5);
-            opacity: 0.5; /* Adjusted opacity */
+        .error-message {
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+            display: none;
         }
 
-        .right-half::after {
-            content: '❯';
-            font-size: 2em; /* Adjusted symbol size */
-            color: rgba(0, 0, 0, 0.5);
-            opacity: 0.5; /* Adjusted opacity */
-        }
-
-        @media (max-width: 390px) {
-            .flipbook-container {
-                width: 100%; /* Full width for screen size */
-                height: auto; /* Maintain aspect ratio */
-                max-height: 70vh; /* Adjusted for better fit */
-            }
-
-            .page {
-                font-size: 18px; /* Adjusted font size for smaller screen */
-            }
-
-            .left-half::before, .right-half::after {
-                font-size: 1.5em; /* Adjusted arrow size for smaller screen */
+        /* Media query for phones */
+        @media (max-width: 600px) {
+            .login-container {
+                margin: 20px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="flipbook-container">
-        <div class="flipbook">
-            <div class="page">
-                <div class="half left-half" onclick="prevPage()"></div>
-                <div class="half right-half" onclick="nextPage()"></div>
-                Page 1
-            </div>
-            <div class="page">
-                <div class="half left-half" onclick="prevPage()"></div>
-                <div class="half right-half" onclick="nextPage()"></div>
-                Page 2
-            </div>
-            <div class="page">
-                <div class="half left-half" onclick="prevPage()"></div>
-                <div class="half right-half" onclick="nextPage()"></div>
-                Page 3
-            </div>
-            <div class="page">
-                <div class="half left-half" onclick="prevPage()"></div>
-                <div class="half right-half" onclick="nextPage()"></div>
-                Page 4
-            </div>
-        </div>
+    <div class="login-container">
+        <h2><span class="heart-icon">❤️</span> Love Login <span class="heart-icon">❤️</span></h2>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Username" required>
+            <span class="hint">Hint: Monthsary date (e.g., July 15)</span>
+            <input type="password" id="password" placeholder="Password" required>
+            <span class="hint">Hint: Monthsary day (e.g., 15)</span>
+            <input type="submit" value="Login">
+            <p id="errorMessage" class="error-message">Hmmmm? kalimtan man 😒</p>
+        </form>
+    
     </div>
 
     <script>
-        const flipbook = document.querySelector('.flipbook');
-        let currentPage = 0;
-        const totalPages = 4;
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
 
-        function updateFlipbook() {
-            const angle = -90 * currentPage;
-            flipbook.style.transform = `rotateY(${angle}deg)`;
-        }
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
 
-        function prevPage() {
-            if (currentPage > 0) {
-                currentPage--;
-                updateFlipbook();
+            // Check if the username and password are correct
+            if (username === 'August' && password === '27') {
+                window.location.href = 'presentation.html'; // Redirect to another HTML file
+            } else {
+                errorMessage.style.display = 'block'; // Show error message
             }
-        }
-
-        function nextPage() {
-            if (currentPage < totalPages - 1) {
-                currentPage++;
-                updateFlipbook();
-            }
-        }
-
-        // Initialize
-        updateFlipbook();
+        });
     </script>
 </body>
 </html>
